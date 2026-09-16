@@ -1,4 +1,4 @@
-import { ProductCategory, ProductImage, RESERVED_SEO_PATHS } from './catalog';
+import { PRODUCT_CATEGORIES, ProductCategory, ProductImage, RESERVED_SEO_PATHS } from './catalog';
 
 export function mapCatalogPayload(data: unknown): ProductCategory[] {
   const rows = extractRows(data);
@@ -68,6 +68,7 @@ function fromFields(
   const seoPath = unique(seo, usedPaths);
   const headline = str(rec, 'headline', 'title') || name;
   const summary = str(rec, 'summary', 'description', 'details');
+  const images = collectImages(rec, name);
   return {
     slug,
     seoPath,
@@ -81,7 +82,7 @@ function fromFields(
     quality: str(rec, 'quality', 'specification', 'specs'),
     shipment: str(rec, 'shipment', 'shipping'),
     compliance: str(rec, 'compliance', 'documents'),
-    images: collectImages(rec, name),
+    images: images.length > 0 ? images : fallbackImages(name),
   };
 }
 
@@ -113,6 +114,35 @@ function collectImages(rec: Record<string, unknown>, name: string): ProductImage
     push(str(rec, `image${n}`, `photo${n}`, `img${n}`), str(rec, `imageAlt${n}`, `imagealt${n}`, `alt${n}`));
   }
   return images;
+}
+
+function fallbackImages(name: string): ProductImage[] {
+  const n = name.toLowerCase();
+  const hit = PRODUCT_CATEGORIES.find(
+    (item) =>
+      n.includes(item.slug) ||
+      n.includes(item.name.toLowerCase()) ||
+      item.varieties.some((variety) => n.includes(variety.toLowerCase().split('(')[0].trim())),
+  );
+  if (hit) {
+    return hit.images;
+  }
+  if (/millet|ragi|bajra|kodo|foxtail/.test(n)) {
+    return PRODUCT_CATEGORIES.find((item) => item.slug === 'millets')?.images ?? [];
+  }
+  if (/spice|turmeric|chilli|chili|cumin|coriander|pepper/.test(n)) {
+    return PRODUCT_CATEGORIES.find((item) => item.slug === 'spices')?.images ?? [];
+  }
+  if (/fruit|pomegranate|banana|mango/.test(n)) {
+    return PRODUCT_CATEGORIES.find((item) => item.slug === 'fruits')?.images ?? [];
+  }
+  if (/vegetable|onion|potato/.test(n)) {
+    return PRODUCT_CATEGORIES.find((item) => item.slug === 'vegetables')?.images ?? [];
+  }
+  if (/pulse|dal|toor|moong|urad|chana|chickpea|lentil/.test(n)) {
+    return PRODUCT_CATEGORIES.find((item) => item.slug === 'pulses')?.images ?? [];
+  }
+  return PRODUCT_CATEGORIES[0]?.images ?? [];
 }
 
 export function normalizeImageUrl(raw: string): string {
