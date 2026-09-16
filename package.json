@@ -1,0 +1,7 @@
+{
+  "name": "kvs-global-exim",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix frontend ci && npm --prefix frontend run build"
+  }
+}

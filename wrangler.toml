@@ -1,0 +1,6 @@
+name = "kvs-global-exim"
+compatibility_date = "2026-09-16"
+
+[assets]
+directory = "./frontend/dist/frontend/browser"
+not_found_handling = "single-page-application"
