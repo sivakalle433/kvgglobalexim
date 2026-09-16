@@ -1,0 +1,35 @@
+<div class="topbar">
+  <div class="container topbar-inner">
+    <p>IEC REGISTERED · APEDA MEMBER · FSSAI LICENSED</p>
+    <div class="topbar-links">
+      <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+      <a [href]="'tel:' + site.phoneTel">{{ site.phoneDisplay }}</a>
+      <a [href]="whatsapp" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a routerLink="/" class="brand" aria-label="KVS Global Exim home">
+      <img class="brand-logo" src="/logo.png" width="1920" height="701" alt="KVS Global Exim" />
+    </a>
+
+    <button class="menu-toggle" type="button" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen">
+      {{ menuOpen ? 'Close' : 'Menu' }}
+    </button>
+
+    <nav class="nav" [class.open]="menuOpen">
+      @for (link of links; track link.path) {
+        <a routerLink="{{ link.path }}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: link.path === '/' }">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-ghost" [href]="whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="btn btn-primary" routerLink="/contact-us">Request a Quote</a>
+    </div>
+  </div>
+</header>

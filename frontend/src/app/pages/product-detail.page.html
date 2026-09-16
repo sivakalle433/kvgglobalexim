@@ -1,0 +1,65 @@
+@if (product) {
+  <section class="page-hero">
+    <div class="container">
+      <p class="crumb">Home / {{ product.name }}</p>
+      <h1>{{ product.headline }}</h1>
+      <p class="lede">{{ product.summary }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <app-product-slideshow [images]="product.images" variant="detail" />
+      <div class="spec-list">
+        <article>
+          <h2>Origin</h2>
+          <p>{{ product.origin }}</p>
+        </article>
+        <article>
+          <h2>Varieties / grades</h2>
+          <ul>
+            @for (item of product.varieties; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+        <article>
+          <h2>Availability</h2>
+          <p>{{ product.availability }}</p>
+        </article>
+        <article>
+          <h2>Packaging options</h2>
+          <ul>
+            @for (item of product.packaging; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+        <article>
+          <h2>Quality &amp; specification</h2>
+          <p>{{ product.quality }}</p>
+        </article>
+        <article>
+          <h2>Shipment</h2>
+          <p>{{ product.shipment }}</p>
+        </article>
+        <article>
+          <h2>Compliance</h2>
+          <p>{{ product.compliance }}</p>
+        </article>
+        <p>Minimum order quantities are confirmed after grade, packing and destination are known.</p>
+        <a class="btn btn-ghost" routerLink="/products">All products</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="enquiry">
+    <div class="container enquiry-wrap">
+      <div>
+        <p class="sec-label">Enquire on {{ product.name }}</p>
+        <h2 class="section-title">Share volume, grade and destination port.</h2>
+      </div>
+      <app-enquiry-form [presetProduct]="product.name" />
+    </div>
+  </section>
+}

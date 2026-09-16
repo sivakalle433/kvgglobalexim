@@ -1,0 +1,165 @@
+<section class="hero">
+  <div class="hero-media" role="img" aria-label="Golden hour farmland in India"></div>
+  <div class="hero-grade" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-map-wrap" aria-hidden="true">
+    <img class="hero-world" src="/world-map.svg" alt="" width="2048" height="997" />
+    <svg class="hero-routes" viewBox="-180 -87.6091 360 175.218" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="routeGold" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#111111" />
+          <stop offset="100%" stop-color="#000000" />
+        </linearGradient>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="1.2" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path class="hero-route" d="M71.3 -29.2 C 56 -32, 48 -31, 41.11 -32.18" fill="none" stroke="#1E90FF" stroke-width="0.7" />
+      <path class="hero-route delay-2" d="M71.3 -29.2 C 42 -46, 18 -58, -0.4 -63.7" fill="none" stroke="#1E90FF" stroke-width="0.7" />
+      <path class="hero-route delay-3" d="M71.3 -29.2 C 54 -22, 38 -8, 26.86 -0.56" fill="none" stroke="#1E90FF" stroke-width="0.7" />
+      <path class="hero-route delay-4" d="M71.3 -29.2 C 82 -24, 92 -12, 98.38 -5.18" fill="none" stroke="#1E90FF" stroke-width="0.7" />
+      <circle class="hero-cargo c1" r="1.15" fill="#4FC3FF" filter="url(#softGlow)" />
+      <circle class="hero-cargo c2" r="1.15" fill="#4FC3FF" filter="url(#softGlow)" />
+      <circle class="hero-cargo c3" r="1.15" fill="#4FC3FF" filter="url(#softGlow)" />
+      <circle class="hero-cargo c4" r="1.15" fill="#4FC3FF" filter="url(#softGlow)" />
+      <circle class="hero-pulse" cx="71.3" cy="-29.2" r="6" fill="#c4a574" />
+      <circle cx="71.3" cy="-29.2" r="1.7" fill="#ffd089" filter="url(#softGlow)" />
+      <circle cx="41.11" cy="-32.18" r="1.2" fill="#fff" />
+      <circle cx="-0.4" cy="-63.7" r="1.2" fill="#fff" />
+      <circle cx="26.86" cy="-0.56" r="1.2" fill="#fff" />
+      <circle cx="98.38" cy="-5.18" r="1.2" fill="#fff" />
+    </svg>
+    <span class="hero-chip chip-india">India · Anantapur</span>
+    <span class="hero-chip chip-me">Middle East</span>
+    <span class="hero-chip chip-eu">Europe</span>
+    <span class="hero-chip chip-af">Africa</span>
+    <span class="hero-chip chip-as">Asia</span>
+  </div>
+  <div class="container hero-copy">
+    <p class="hero-kicker">Export operations · India</p>
+    <p class="eyebrow">Anantapur, Andhra Pradesh · B2B agricultural exports</p>
+    <h1>From India’s Farms to Global Markets</h1>
+    <p class="lede">Premium Indian Agricultural Products for International Buyers</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="#enquiry">Request a Quote</a>
+      <a class="btn btn-outline btn-lg" routerLink="/products">Explore Products</a>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="container trust-grid">
+    @for (item of trust; track item.title) {
+      <article class="trust-card">
+        <p class="card-kicker">{{ item.kicker }}</p>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.body }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-label">Sec / 01 — Export process</p>
+    <h2 class="section-title">A straightforward path from enquiry to shipment</h2>
+    <p class="section-intro">Requirement, sourcing, checks, packing and documents, then shipment — kept factual and easy to follow.</p>
+    <div class="process-grid">
+      @for (step of steps; track step.stage) {
+        <article>
+          <span>Stage {{ step.stage }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.body }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container">
+    <p class="sec-label">Sec / 02 — Product range</p>
+    <h2 class="section-title">Quality Indian agricultural products for international buyers.</h2>
+    <p class="section-intro">Open a category for origin, packing and shipment notes.</p>
+    <div class="product-grid">
+      @for (item of products; track item.slug) {
+        <article class="product-card">
+          <app-product-slideshow [images]="item.images" [delay]="$index * 450" />
+          <div class="product-card-body">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.summary }}</p>
+            <p class="sku-line">{{ item.varieties.slice(0, 3).join(' · ') }}</p>
+            <a class="text-link" [routerLink]="'/' + item.seoPath">View Products</a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div>
+      <p class="sec-label">Sec / 03 — About us</p>
+      <h2 class="section-title">An India-based agricultural export partner</h2>
+      <p>
+        KVS Global Exim works with international buyers who need a clear sourcing path for Indian agricultural products.
+        We coordinate product matching, packing and export documentation without inflating our history or market claims.
+      </p>
+      <a class="btn btn-primary" routerLink="/about-us">Read More About Us</a>
+    </div>
+    <img
+      class="split-image"
+      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80"
+      alt="Agricultural fields in India"
+      width="720"
+      height="480"
+    />
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container">
+    <p class="sec-label light">Sec / 04 — From India to the World</p>
+    <h2 class="section-title">Broad regions we are ready to serve</h2>
+    <p class="lede">Specific destination countries will be listed as actual shipments are established.</p>
+    <div class="region-grid">
+      @for (region of regions; track region) {
+        <article>{{ region }}</article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="container">
+    <p class="sec-label">Sec / 05 — Trust &amp; compliance</p>
+    <h2 class="section-title">Registrations shown only when verified</h2>
+    <p class="section-intro">
+      IEC, GST, Udyam, APEDA, FSSAI and RCMC badges will appear here only after each registration is obtained and applicable.
+    </p>
+    <div class="compliance-row">
+      <span>IEC</span>
+      <span>GST</span>
+      <span>Udyam</span>
+      <span>APEDA</span>
+      <span>FSSAI</span>
+      <span>RCMC</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="enquiry">
+  <div class="container enquiry-wrap">
+    <div>
+      <p class="sec-label">Looking for Indian Products?</p>
+      <h2 class="section-title">Share your requirement with us and our team will get back to you.</h2>
+      <p>Include product, grade, quantity, packing and destination port so we can respond with a workable offer.</p>
+    </div>
+    <app-enquiry-form />
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="brand brand-footer">
+        <img class="brand-logo" src="/logo.png" width="1920" height="701" alt="KVS Global Exim" />
+      </div>
+    </div>
+
+    <div>
+      <h2>Quick links</h2>
+      <a routerLink="/about-us">About Us</a>
+      <a routerLink="/products">Products</a>
+      <a routerLink="/quality-and-packaging">Quality &amp; Packaging</a>
+      <a routerLink="/export-markets">Export Markets</a>
+      <a routerLink="/contact-us">Contact Us</a>
+    </div>
+
+    <div>
+      <h2>Products</h2>
+      @for (item of products; track item.slug) {
+        <a [routerLink]="'/' + item.seoPath">{{ item.name }}</a>
+      }
+    </div>
+
+    <div>
+      <h2>Contact</h2>
+      <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+      <a [href]="'tel:' + site.phoneTel">{{ site.phoneDisplay }}</a>
+      <a [href]="'tel:' + site.phoneTelAlt">{{ site.phoneDisplayAlt }}</a>
+      <a [href]="whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <p>{{ site.office }}</p>
+      <p>{{ site.markets }}</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {{ year }} KVS Global Exim. All rights reserved.</p>
+    <div>
+      <a routerLink="/privacy-policy">Privacy Policy</a>
+      <a routerLink="/terms-and-conditions">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>

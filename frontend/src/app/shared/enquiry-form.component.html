@@ -1,0 +1,92 @@
+@if (submitted) {
+  <div class="form-card form-success" role="status">
+    <div class="confirm-box">
+      <h3>Message sent</h3>
+      <p>Thank you. Our team will review your requirement and respond by email.</p>
+    </div>
+  </div>
+} @else {
+  <form class="form-card enquiry-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <h3>{{ heading }}</h3>
+    <p class="hint">{{ hint }}</p>
+    <label class="hp" aria-hidden="true">
+      Website
+      <input type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+    </label>
+
+    <div class="form-grid">
+      <label>
+        Name <span class="req">*</span>
+        <input type="text" formControlName="name" autocomplete="name" />
+        @if (invalid('name')) {
+          <span class="field-error">Enter your name</span>
+        }
+      </label>
+      <label>
+        Company
+        <input type="text" formControlName="company" autocomplete="organization" />
+      </label>
+      <label>
+        Email <span class="req">*</span>
+        <input type="email" formControlName="email" autocomplete="email" />
+        @if (invalid('email')) {
+          <span class="field-error">Enter a valid email</span>
+        }
+      </label>
+      <label>
+        Country <span class="req">*</span>
+        <input type="text" formControlName="country" autocomplete="country-name" />
+        @if (invalid('country')) {
+          <span class="field-error">Enter your country</span>
+        }
+      </label>
+      <label class="phone-combo">
+        WhatsApp / Phone
+        <div class="phone-split">
+          <select formControlName="countryCode" aria-label="Country code">
+            @for (item of dialCodes; track item.iso) {
+              <option [value]="item.iso">{{ item.dial }} {{ item.name }}</option>
+            }
+          </select>
+          <input type="tel" formControlName="phone" autocomplete="tel-national" inputmode="tel" placeholder="Number" />
+        </div>
+      </label>
+      <label>
+        Product
+        <select formControlName="product">
+          <option value="">Select a product</option>
+          @for (name of productOptions; track name) {
+            <option [value]="name">{{ name }}</option>
+          }
+          @if (!productOptions.includes('Other / mixed container')) {
+            <option value="Other / mixed container">Other / mixed container</option>
+          }
+        </select>
+      </label>
+      <label>
+        Quantity
+        <input type="text" formControlName="quantity" placeholder="e.g. 1 x 20ft container" />
+      </label>
+      <label>
+        Destination port
+        <input type="text" formControlName="destinationPort" />
+      </label>
+      <label class="full">
+        Packaging requirement
+        <input type="text" formControlName="packagingRequirement" placeholder="Bags, cartons, private label, etc." />
+      </label>
+      <label class="full">
+        Message
+        <textarea formControlName="message" rows="5" placeholder="Grade, specifications, Incoterms, target shipment month"></textarea>
+      </label>
+    </div>
+
+    @if (error) {
+      <p class="form-error">{{ error }}</p>
+    }
+
+    <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="submitting">
+      {{ submitting ? 'Sending…' : 'Send Enquiry' }}
+    </button>
+  </form>
+}
