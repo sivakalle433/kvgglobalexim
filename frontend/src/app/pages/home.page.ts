@@ -24,8 +24,8 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.seo.set(
-      'KVS Global Exim | Indian Agricultural Products for International Buyers',
-      'KVS Global Exim sources, packs and exports Indian millets, spices, fruits, vegetables and pulses for international buyers.',
+      'KVS Global Exim | International Export & Import',
+      'KVS Global Exim - International export and import of quality products from India. Indian agricultural products for international buyers.',
     );
     this.catalog.list().subscribe((items) => {
       this.products = items;
