@@ -1,4 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, Input, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ProductImage } from '../data/catalog';
 
 @Component({
@@ -41,11 +42,14 @@ export class ProductSlideshowComponent implements OnInit, OnDestroy {
   @Input() delay = 0;
 
   index = 0;
+  private readonly platformId = inject(PLATFORM_ID);
   private timer?: ReturnType<typeof setInterval>;
   private startTimer?: ReturnType<typeof setTimeout>;
 
   ngOnInit(): void {
-    this.start();
+    if (isPlatformBrowser(this.platformId)) {
+      this.start();
+    }
   }
 
   ngOnDestroy(): void {
@@ -67,7 +71,7 @@ export class ProductSlideshowComponent implements OnInit, OnDestroy {
   }
 
   private start(): void {
-    if (this.images.length < 2 || this.prefersReducedMotion()) {
+    if (!isPlatformBrowser(this.platformId) || this.images.length < 2 || this.prefersReducedMotion()) {
       return;
     }
     this.stop();

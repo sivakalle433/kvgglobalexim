@@ -14,6 +14,7 @@ export const SITE = {
   hours: 'Mon–Fri 09:00–18:00 · Sat 09:00–14:00 IST',
   office: 'Anantapur, Andhra Pradesh (full address on request)',
   markets: 'Serving buyers across EU, GCC & USA',
+  origin: 'https://kvsglobalexim.com',
   /** Inbox that receives website enquiries (same as kvs.enquiry.notify-to). */
   enquiryNotifyEmail: 'kallesivaiah@gmail.com',
   /** Google Apps Script web-app /exec URL. Reads the product sheet and can send enquiries. Empty = FormSubmit for mail; built-in product list until the script URL is set. */
